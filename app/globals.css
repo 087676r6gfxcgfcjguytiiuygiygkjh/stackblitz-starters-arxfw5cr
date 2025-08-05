@@ -2,35 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/* Correção mínima para adaptação ao modo claro/escuro */
+input, textarea, select {
+  background-color: inherit;
+  color: inherit;
+  border-color: #ccc;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-
-  /* Corrige texto dos inputs no modo escuro */
-  input[type="email"] {
-    color: white;
-  }
-
-  input::placeholder {
-    color: #aaa;
-  }
+/* Correção específica para WebKit (Chrome, Safari) */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: inherit !important;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* Corrige campos que ficam brancos no dark mode */
+input[type="email"],
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+input[type="time"] {
+  background-color: transparent;
+  color: inherit;
 }
